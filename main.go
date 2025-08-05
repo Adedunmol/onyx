@@ -19,21 +19,22 @@ func (r *Repl) Print() {
 }
 
 func (r *Repl) Run() {
+	scanner := bufio.NewScanner(os.Stdin)
+
 	for {
 		r.Print()
-		scanner := bufio.NewScanner(os.Stdin)
-		if scanner.Scan() {
-			err := scanner.Err()
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Scanner error: %v\n", err)
-			} else {
-				fmt.Print("\nExiting.")
+
+		if !scanner.Scan() {
+			if err := scanner.Err(); err != nil {
+				fmt.Println(err)
+				//fmt.Fprintln(os.Stderr, "reading standard input:", err)
 			}
+			fmt.Println("EOF")
 			break
 		}
 
 		line := strings.TrimSpace(scanner.Text())
 
-		fmt.Println("Echo:", line)
+		fmt.Println("echo:", line)
 	}
 }
