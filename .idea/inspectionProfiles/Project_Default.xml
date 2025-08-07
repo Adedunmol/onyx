@@ -4,6 +4,7 @@
     <inspection_tool class="GoDfaErrorMayBeNotNil" enabled="true" level="WARNING" enabled_by_default="true">
       <methods>
         <method importPath="github.com/moby/moby/client" receiver="*Client" name="ContainerCreate" />
+        <method importPath="github.com/moby/moby/client" receiver="*Client" name="ContainerExecCreate" />
       </methods>
     </inspection_tool>
   </profile>
